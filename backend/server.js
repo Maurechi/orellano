@@ -1,8 +1,15 @@
 import express from 'express';
 import dotenv from 'dotenv';
+import connectDB from './config/db.js';
 import products from './data/products.js';
 
+// Load .env files into process.env
 dotenv.config();
+
+// Starting Database
+connectDB();
+
+// Starting Express
 const app = express();
 
 // Root
