@@ -27,7 +27,12 @@ router.get(
     if (product) {
       res.json(product);
     } else {
-      res.status(404).json({ message: 'Product not found' });
+      // This message will appear only if the formatting of the Id still aligns
+      // with a typical product Id, but without actually finding any matching product
+      // If we erase the line below it will be status 500
+      res.status(404);
+      // This Error is formatted by our custom error handler
+      throw new Error('Product not found');
     }
   })
 );
