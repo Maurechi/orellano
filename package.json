@@ -1,0 +1,23 @@
+{
+  "name": "orellano",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node backend/server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Maurechi/orellano.git"
+  },
+  "keywords": [],
+  "author": "Mauro Guz",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Maurechi/orellano/issues"
+  },
+  "homepage": "https://github.com/Maurechi/orellano#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
