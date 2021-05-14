@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import connectDB from './config/db.js';
 import colors from 'colors';
 import productRoutes from './routes/productRoutes.js';
+import userRoutes from './routes/userRoutes.js';
 import { notFound, errorHandler } from './middleware/errorMiddleware.js';
 
 // Load .env files into process.env
@@ -14,12 +15,16 @@ connectDB();
 // Starting Express
 const app = express();
 
+// this will allow us to accept JSON data in body
+app.use(express.json());
+
 // Root
 app.get('/', (req, res) => {
   res.send('Api is running...');
 });
 
 app.use('/api/products', productRoutes);
+app.use('/api/users', userRoutes);
 
 // Custom Error Handler Middlewares "./middleware/errorMiddleware.js"
 app.use(notFound);
