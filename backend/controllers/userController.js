@@ -29,4 +29,29 @@ const authUser = asyncHandler(async (req, res) => {
 //   res.json(users);
 // });
 
-export { authUser };
+// desc: Get user profile
+// route: GET /api/users/profile
+// access: Private
+const getUserProfile = asyncHandler(async (req, res) => {
+  // we can use req.user because of the middleware we created
+  const user = await User.findById(req.user._id);
+
+  if (user) {
+    res.json({
+      _id: user._id,
+      name: user.name,
+      email: user.email,
+      isAdmin: user.isAdmin,
+    });
+  } else {
+    res.status(404);
+    throw new Error('User not found');
+  }
+});
+
+// const getUsers = asyncHandler(async (req, res) => {
+//   const users = await User.find({});
+//   res.json(users);
+// });
+
+export { authUser, getUserProfile };
