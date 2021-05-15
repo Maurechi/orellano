@@ -36,6 +36,16 @@ userSchema.methods.matchPassword = async function (enteredPassword) {
   return await bcrypt.compare(enteredPassword, this.password);
 };
 
+// this will automatically run before saving. We don't need to import it anywhere
+userSchema.pre('save', async function (next) {
+  if (!this.isModified('password')) {
+    next();
+  }
+
+  const salt = await bcrypt.genSalt(10);
+  this.password = await bcrypt.hash(this.password, salt);
+});
+
 // Creating Model that will conform to our schema with its required fields
 const User = mongoose.model('User', userSchema);
 
