@@ -2,7 +2,6 @@ import mongoose from 'mongoose';
 
 const orderSchema = mongoose.Schema(
   {
-    // User that bought the product
     user: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,
@@ -21,7 +20,7 @@ const orderSchema = mongoose.Schema(
         },
       },
     ],
-    shippingAdress: {
+    shippingAddress: {
       address: { type: String, required: true },
       city: { type: String, required: true },
       postalCode: { type: String, required: true },
