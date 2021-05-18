@@ -11,5 +11,5 @@ router.route('/').post(protect, addOrderItems);
 
 // When you have routes with dynamic variables (:id) put them on the bottom, any route before that will be interpreted as an id
 router.route('/:id').get(protect, getOrderById);
-router.route('/:id/payed').put(protect, updateOrderToPaid);
+router.route('/:id/pay').put(protect, updateOrderToPaid);
 export default router;
