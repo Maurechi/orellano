@@ -77,4 +77,15 @@ const updateOrderToPaid = asyncHandler(async (req, res) => {
   throw new Error('Order Not Found');
 });
 
-export { addOrderItems, getOrderById, updateOrderToPaid };
+// Get logged in user orders
+// Route: Get api/orders/myorders
+// Access: Private
+const getUserOrders = asyncHandler(async (req, res) => {
+  /* mongoose method to get all orders where the user 
+  attached to that order is the one thats logged in */
+  const orders = await Order.find({ user: req.user._id });
+
+  return res.json(orders);
+});
+
+export { addOrderItems, getOrderById, updateOrderToPaid, getUserOrders };
