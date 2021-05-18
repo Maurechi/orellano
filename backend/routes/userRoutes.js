@@ -6,11 +6,12 @@ import {
   getUserProfile,
   registerUser,
   updateUserProfile,
+  getAllUsers,
 } from '../controllers/userController.js';
-import { protect } from '../middleware/authMiddleware.js';
+import { protect, admin } from '../middleware/authMiddleware.js';
 
 router.post('/login', authUser);
-router.route('/').post(registerUser);
+router.route('/').post(registerUser).get(protect, admin, getAllUsers);
 // implementing middleware by using it as the first argument
 router
   .route('/profile')
