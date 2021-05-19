@@ -5,16 +5,19 @@ const reviewSchema = mongoose.Schema(
     name: { type: String, required: true },
     rating: { type: Number, required: true },
     comment: { type: String, required: true },
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+      ref: 'User',
+    },
   },
   {
     timestamps: true,
   }
 );
 
-// Creating User Schema
 const productSchema = mongoose.Schema(
   {
-    // Add connection between a product and user with reference
     user: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,
@@ -67,7 +70,6 @@ const productSchema = mongoose.Schema(
   }
 );
 
-// Creating Model that will conform to our schema with its required fields
 const Product = mongoose.model('Product', productSchema);
 
 export default Product;
