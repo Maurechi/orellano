@@ -6,8 +6,17 @@ import { json } from 'express';
 // Route: GET api/products
 // Access: Public
 const getProducts = asyncHandler(async (req, res) => {
+  // getting the query after the '?'
+  const keyword = req.query.keyword
+    ? {
+        name: {
+          $regex: req.query.keyword,
+          $options: 'i',
+        },
+      }
+    : {};
   // mongoose method on model
-  const products = await Product.find({});
+  const products = await Product.find({ ...keyword });
   return res.json(products);
 });
 
