@@ -1,8 +1,8 @@
 import path from 'path';
 import express from 'express';
 import multer from 'multer';
-
 const router = express.Router();
+
 const storage = multer.diskStorage({
   destination(req, file, cb) {
     cb(null, 'uploads/');
@@ -23,7 +23,7 @@ function checkFileType(file, cb) {
   if (extname && mimetype) {
     return cb(null, true);
   } else {
-    cb('Images with jpg, jpeg or png only');
+    cb('Images only!');
   }
 }
 

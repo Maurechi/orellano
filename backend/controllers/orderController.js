@@ -88,4 +88,39 @@ const getUserOrders = asyncHandler(async (req, res) => {
   return res.json(orders);
 });
 
-export { addOrderItems, getOrderById, updateOrderToPaid, getUserOrders };
+// Get all orders
+// Route: Get api/orders/orders
+// Access: Private/Admin
+const getOrders = asyncHandler(async (req, res) => {
+  /* mongoose method to get all orders where the user 
+  attached to that order is the one thats logged in */
+  const orders = await Order.find({}).populate('user', 'id name');
+
+  return res.json(orders);
+});
+
+// Update order to delivered
+// Route: Get api/orders/:id/deliver
+// Access: Private/admin
+const updateOrderToDelivered = asyncHandler(async (req, res) => {
+  const order = await Order.findById(req.params.id);
+
+  if (order) {
+    order.isDelivered = true;
+    order.deliveredAt = Date.now();
+
+    const updatedOrder = await order.save();
+
+    return res.json(updatedOrder);
+  } else res.status(404);
+  throw new Error('Order Not Found');
+});
+
+export {
+  addOrderItems,
+  getOrderById,
+  updateOrderToPaid,
+  getUserOrders,
+  getOrders,
+  updateOrderToDelivered,
+};
