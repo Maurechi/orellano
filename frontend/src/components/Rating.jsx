@@ -70,6 +70,9 @@ const Rating = ({ value, text, color }) => {
 
 Rating.defaultProps = {
   color: '#f8e825',
+  value: 0,
+  numReviews: 0,
+  text: '',
 };
 
 // Optional Static Object Assignment
