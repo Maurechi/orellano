@@ -7,7 +7,7 @@ import { json } from 'express';
 // Access: Public
 const getProducts = asyncHandler(async (req, res) => {
   // how many products per page
-  const pageSize = 6;
+  const pageSize = 4;
   const page = Number(req.query.pageNumber) || 1;
   // getting the query after the '?' for searches
   const keyword = req.query.keyword

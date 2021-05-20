@@ -8,6 +8,7 @@ import Loader from '../components/Loader';
 import Paginate from '../components/Paginate';
 import Meta from '../components/Meta';
 import ProductCarousel from '../components/ProductCarousel';
+// import PicturesCarousel from '../components/PicturesCarousel';
 import { listProducts } from '../actions/productActions';
 
 const HomeScreen = ({ match }) => {
@@ -32,7 +33,11 @@ const HomeScreen = ({ match }) => {
           Go back
         </Link>
       )}
-      {!keyword && <h1>Latests Products</h1>}
+      {!keyword && (
+        <div className="latest">
+          <h1 className="text-center white mt-auto">Latests Products</h1>
+        </div>
+      )}
       {loading ? (
         <Loader />
       ) : error ? (
