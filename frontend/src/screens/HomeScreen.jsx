@@ -3,8 +3,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Row, Col } from 'react-bootstrap';
 import Product from '../components/Product';
 import Message from '../components/Message';
+import { Link } from 'react-router-dom';
 import Loader from '../components/Loader';
 import Paginate from '../components/Paginate';
+import Meta from '../components/Meta';
 import ProductCarousel from '../components/ProductCarousel';
 import { listProducts } from '../actions/productActions';
 
@@ -22,8 +24,15 @@ const HomeScreen = ({ match }) => {
 
   return (
     <>
-      {!keyword && <ProductCarousel />}
-      <h1>Latests Products</h1>
+      <Meta />
+      {!keyword ? (
+        <ProductCarousel />
+      ) : (
+        <Link to="/" className="btn btn-light">
+          Go back
+        </Link>
+      )}
+      {!keyword && <h1>Latests Products</h1>}
       {loading ? (
         <Loader />
       ) : error ? (
