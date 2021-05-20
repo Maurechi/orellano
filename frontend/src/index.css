@@ -40,6 +40,11 @@ a {
   object-fit: cover;
 }
 
+.black-marble {
+  background-image: url('https://i.pinimg.com/originals/56/f9/e2/56f9e272de8708a62f2b94d941382415.jpg');
+  background-size: cover;
+}
+
 .carrousel-fade-img {
   /* height: 100% !important; */
   width: 100% !important;
@@ -62,6 +67,14 @@ a {
   align-content: space-around;
   justify-content: center;
   flex-wrap: wrap;
+}
+
+.black {
+  color: #343a40 !important;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+  color: #343a40 !important;
 }
 
 .white {
