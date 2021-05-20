@@ -6,7 +6,10 @@ import { json } from 'express';
 // Route: GET api/products
 // Access: Public
 const getProducts = asyncHandler(async (req, res) => {
-  // getting the query after the '?'
+  // how many products per page
+  const pageSize = 6;
+  const page = Number(req.query.pageNumber) || 1;
+  // getting the query after the '?' for searches
   const keyword = req.query.keyword
     ? {
         name: {
@@ -15,9 +18,13 @@ const getProducts = asyncHandler(async (req, res) => {
         },
       }
     : {};
+  // getting number of products
+  const count = await Product.countDocuments({ ...keyword });
   // mongoose method on model
-  const products = await Product.find({ ...keyword });
-  return res.json(products);
+  const products = await Product.find({ ...keyword })
+    .limit(pageSize)
+    .skip(pageSize * (page - 1));
+  return res.json({ products, page, pages: Math.ceil(count / pageSize) });
 });
 
 // fetch one product

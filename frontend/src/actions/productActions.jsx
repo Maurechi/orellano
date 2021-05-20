@@ -21,12 +21,14 @@ import {
 } from '../constants/productConstants';
 // this "() => async (dispatch) => " will use thunk to manage async fetching
 export const listProducts =
-  (keyword = '') =>
+  (keyword = '', pageNumber = '') =>
   async (dispatch) => {
     try {
       dispatch({ type: PRODUCT_LIST_REQUEST });
 
-      const { data } = await axios.get(`/api/products?keyword=${keyword}`);
+      const { data } = await axios.get(
+        `/api/products?keyword=${keyword}&pageNumber=${pageNumber}`
+      );
 
       dispatch({
         type: PRODUCT_LIST_SUCCESS,
