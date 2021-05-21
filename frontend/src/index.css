@@ -41,6 +41,12 @@ a {
   }
 }
 
+.carousel-img {
+  height: 227px !important;
+  width: 227px;
+  object-fit: cover;
+}
+
 .product-img {
   height: 546px !important;
   width: 546px;
