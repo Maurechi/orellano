@@ -12,12 +12,29 @@ const getProducts = asyncHandler(async (req, res) => {
   // getting the query after the '?' for searches
   const keyword = req.query.keyword
     ? {
-        name: {
-          $regex: req.query.keyword,
-          $options: 'i',
-        },
+        $or: [
+          {
+            name: {
+              $regex: req.query.keyword,
+              $options: 'i',
+            },
+          },
+          {
+            category: {
+              $regex: req.query.keyword,
+              $options: 'i',
+            },
+          },
+          {
+            brand: {
+              $regex: req.query.keyword,
+              $options: 'i',
+            },
+          },
+        ],
       }
     : {};
+
   // getting number of products
   const count = await Product.countDocuments({ ...keyword });
   // mongoose method on model

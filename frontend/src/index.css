@@ -24,14 +24,21 @@ a {
   text-decoration: none;
 }
 
+.card-width {
+  width: 288px !important;
+  margin: 1em !important;
+}
+
 .pagination {
   justify-content: center;
 }
 
-.card-img-top {
-  height: 227px !important;
-  width: 227px;
-  object-fit: cover;
+@media (min-width: 1400px) {
+  .card-img-top {
+    height: 227px;
+    width: 270px;
+    object-fit: cover;
+  }
 }
 
 .product-img {
