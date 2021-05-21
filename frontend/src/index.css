@@ -35,10 +35,23 @@ a {
 
 @media (min-width: 1400px) {
   .card-img-top {
-    height: 227px;
+    height: 227px !important;
     width: 270px;
     object-fit: cover;
   }
+}
+
+@media (max-width: 770px) {
+  .card-img-top {
+    /* height: 227px !important; */
+    /* width: 270px; */
+    object-fit: fill;
+  }
+}
+
+.card-img-top {
+  height: 227px !important;
+  object-fit: cover;
 }
 
 .carousel-img {
