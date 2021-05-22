@@ -2,6 +2,7 @@ import path from 'path';
 import express from 'express';
 import dotenv from 'dotenv';
 import colors from 'colors';
+import cors from 'cors';
 import morgan from 'morgan';
 import { notFound, errorHandler } from './middleware/errorMiddleware.js';
 import connectDB from './config/db.js';
@@ -17,6 +18,16 @@ dotenv.config();
 connectDB();
 
 const app = express();
+// app.use(cors);
+app.use((req, res, next) => {
+  if (process.env.NODE_ENV === 'production') {
+    if (req.headers.host === 'macellaio.herokuapp.com')
+      return res.redirect(301, 'https://www.macellaio.store');
+    if (req.headers['x-forwarded-proto'] !== 'https')
+      return res.redirect('https://' + req.headers.host + req.url);
+    else return next();
+  } else return next();
+});
 
 if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
