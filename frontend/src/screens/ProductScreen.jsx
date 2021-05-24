@@ -64,7 +64,7 @@ const ProductScreen = ({ history, match }) => {
   return (
     <>
       <Meta title={product.name} />
-      <Link to="/" className="btn btn-light my-3">
+      <Link to="/" className="btn btn-light my-3 grow">
         Go Back
       </Link>
       {loading ? (

@@ -31,24 +31,31 @@ const Header = () => {
             <SearchBox />
             <Nav className="ml-auto">
               <LinkContainer to="/cart">
-                <Nav.Link className="black">
+                <Nav.Link className="black grow">
                   <i className="fas fa-shopping-cart"></i>Cart
                 </Nav.Link>
               </LinkContainer>
               {userInfo ? (
-                <NavDropdown className="black" title={userInfo.name} id="user">
+                <NavDropdown
+                  className="black grow"
+                  title={userInfo.name}
+                  id="user"
+                >
                   <LinkContainer to="/profile">
                     <NavDropdown.Item className="black">
                       Profile
                     </NavDropdown.Item>
                   </LinkContainer>
-                  <NavDropdown.Item className="black" onClick={logoutHandler}>
+                  <NavDropdown.Item
+                    className="black grow"
+                    onClick={logoutHandler}
+                  >
                     Logout
                   </NavDropdown.Item>
                 </NavDropdown>
               ) : (
                 <LinkContainer to="/login">
-                  <Nav.Link className="black">
+                  <Nav.Link className="black grow">
                     <i className="fas fa-user"></i>Sign in
                   </Nav.Link>
                 </LinkContainer>
