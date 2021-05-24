@@ -19,6 +19,7 @@ import {
   createProductReview,
 } from '../actions/productActions';
 import { PRODUCT_CREATE_REVIEW_RESET } from '../constants/productConstants';
+import { motion } from 'framer-motion';
 
 const ProductScreen = ({ history, match }) => {
   const [qty, setQty] = useState(1);
@@ -62,7 +63,11 @@ const ProductScreen = ({ history, match }) => {
     );
   };
   return (
-    <>
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.6 }}
+    >
       <Meta title={product.name} />
       <Link to="/" className="btn btn-light my-3 grow">
         Go Back
@@ -217,7 +222,7 @@ const ProductScreen = ({ history, match }) => {
           </Row>
         </>
       )}
-    </>
+    </motion.div>
   );
 };
 

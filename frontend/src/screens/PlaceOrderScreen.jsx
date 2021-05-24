@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import Message from '../components/Message';
 import { createOrder } from '../actions/orderActions';
 import CheckoutSteps from '../components/CheckoutSteps';
+import { motion } from 'framer-motion';
 
 const PlaceOrderScreen = ({ history }) => {
   const dispatch = useDispatch();
@@ -54,7 +55,11 @@ const PlaceOrderScreen = ({ history }) => {
     );
   };
   return (
-    <>
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.6 }}
+    >
       <CheckoutSteps step1 step2 step3 step4 />
       <Row>
         <Col md={8}>
@@ -155,7 +160,7 @@ const PlaceOrderScreen = ({ history }) => {
           </Card>
         </Col>
       </Row>
-    </>
+    </motion.div>
   );
 };
 

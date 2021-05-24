@@ -1,8 +1,11 @@
 import { Card } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
+import React, { useEffect } from 'react';
 // import Rating from './Rating';
 
 const Product = ({ product }) => {
+  <motion.div animate={{ scale: 2 }} transition={{ duration: 0.5 }} />;
   return (
     <div className="grow">
       <Card className="my-3 p-3 rounded">

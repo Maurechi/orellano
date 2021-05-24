@@ -10,6 +10,7 @@ import Meta from '../components/Meta';
 import ProductCarousel from '../components/ProductCarousel';
 // import PicturesCarousel from '../components/PicturesCarousel';
 import { listProducts } from '../actions/productActions';
+import { AnimatePresence, motion } from 'framer-motion';
 
 const HomeScreen = ({ match }) => {
   const keyword = match.params.keyword;
@@ -24,7 +25,11 @@ const HomeScreen = ({ match }) => {
   }, [dispatch, keyword, pageNumber]);
 
   return (
-    <>
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.6 }}
+    >
       <Meta />
       {!keyword ? (
         <ProductCarousel />
@@ -45,9 +50,15 @@ const HomeScreen = ({ match }) => {
       ) : (
         <>
           <Row>
-            {products.map((product) => (
+            {products.map((product, i) => (
               <Col key={product._id} sm={12} md={6} lg={4} xl={3}>
-                <Product product={product} />
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.6 }}
+                >
+                  <Product product={product} />
+                </motion.div>
               </Col>
             ))}
           </Row>
@@ -58,7 +69,7 @@ const HomeScreen = ({ match }) => {
           />
         </>
       )}
-    </>
+    </motion.div>
   );
 };
 
