@@ -12,7 +12,7 @@ import {
 } from 'react-bootstrap';
 import Message from '../components/Message';
 import { addToCart, removeFromCart } from '../actions/cartActions';
-import { motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 
 const CartScreen = ({ match, location, history }) => {
   const productId = match.params.id;
@@ -42,9 +42,9 @@ const CartScreen = ({ match, location, history }) => {
   };
   return (
     <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.6 }}
+    // initial={{ opacity: 0 }}
+    // animate={{ opacity: 1 }}
+    // transition={{ duration: 0.6 }}
     >
       <Row>
         <Col md={8}>
@@ -54,47 +54,77 @@ const CartScreen = ({ match, location, history }) => {
               Your cart is empty <Link to="/">Go Back</Link>
             </Message>
           ) : (
-            <ListGroup variant="flush">
-              {cartItems.map((item) => (
-                <ListGroup.Item key={item.product}>
-                  <Row>
-                    <Col md={2}>
-                      <Image src={item.image} alt={item.name} fluid rounded />
-                    </Col>
-                    <Col md={3}>
-                      <Link to={`/product/${item.product}`}>{item.name}</Link>
-                    </Col>
-                    <Col md={2}>${item.price}</Col>
-                    <Col md={2}>
-                      <Form.Control
-                        as="select"
-                        value={item.qty}
-                        onChange={(e) =>
-                          dispatch(
-                            addToCart(item.product, Number(e.target.value))
-                          )
-                        }
-                      >
-                        {[...Array(item.countInStock).keys()].map((x) => (
-                          <option key={x + 1} value={x + 1}>
-                            {x + 1}
-                          </option>
-                        ))}
-                      </Form.Control>
-                    </Col>
-                    <Col md={2}>
-                      <Button
-                        type="button"
-                        variant="light"
-                        onClick={() => removeFromCartHandler(item.product)}
-                      >
-                        <i className="fas fa-trash" />
-                      </Button>
-                    </Col>
-                  </Row>
-                </ListGroup.Item>
-              ))}
-            </ListGroup>
+            <AnimatePresence>
+              <ListGroup variant="flush">
+                {cartItems.map((item, i) => (
+                  <motion.div
+                    custom={i}
+                    variants={{
+                      hidden: (i) => ({
+                        opacity: 0,
+                        y: -50 * i,
+                      }),
+                      visible: (i) => ({
+                        y: 0,
+                        opacity: 1,
+                        transition: {
+                          delay: i * 0.1,
+                        },
+                      }),
+                    }}
+                    initial="hidden"
+                    animate="visible"
+                    exit="hidden"
+                    key={item.product}
+                  >
+                    <ListGroup.Item key={item.product}>
+                      <Row>
+                        <Col md={2}>
+                          <Image
+                            src={item.image}
+                            alt={item.name}
+                            fluid
+                            rounded
+                          />
+                        </Col>
+                        <Col md={3}>
+                          <Link to={`/product/${item.product}`}>
+                            {item.name}
+                          </Link>
+                        </Col>
+                        <Col md={2}>${item.price}</Col>
+                        <Col md={2}>
+                          <Form.Control
+                            as="select"
+                            value={item.qty}
+                            onChange={(e) =>
+                              dispatch(
+                                addToCart(item.product, Number(e.target.value))
+                              )
+                            }
+                          >
+                            {[...Array(item.countInStock).keys()].map((x) => (
+                              <option key={x + 1} value={x + 1}>
+                                {x + 1}
+                              </option>
+                            ))}
+                          </Form.Control>
+                        </Col>
+                        <Col md={2}>
+                          <Button
+                            type="button"
+                            variant="light"
+                            onClick={() => removeFromCartHandler(item.product)}
+                          >
+                            <i className="fas fa-trash" />
+                          </Button>
+                        </Col>
+                      </Row>
+                    </ListGroup.Item>
+                  </motion.div>
+                ))}
+              </ListGroup>
+            </AnimatePresence>
           )}
         </Col>
         <Col md={4}>

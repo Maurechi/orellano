@@ -67,6 +67,7 @@ const ProductScreen = ({ history, match }) => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.6 }}
+      exit={{ opacity: 0 }}
     >
       <Meta title={product.name} />
       <Link to="/" className="btn btn-light my-3 grow">

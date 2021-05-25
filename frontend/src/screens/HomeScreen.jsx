@@ -28,6 +28,7 @@ const HomeScreen = ({ match }) => {
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
       transition={{ duration: 0.6 }}
     >
       <Meta />
@@ -53,8 +54,21 @@ const HomeScreen = ({ match }) => {
             {products.map((product, i) => (
               <Col key={product._id} sm={12} md={6} lg={4} xl={3}>
                 <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
+                  variants={{
+                    hidden: {
+                      opacity: 0,
+                    },
+                    visible: (i) => ({
+                      opacity: 1,
+                      transition: {
+                        delay: i * 0.09,
+                      },
+                    }),
+                  }}
+                  custom={i}
+                  initial="hidden"
+                  animate="visible"
+                  exit="hidden"
                   transition={{ duration: 0.6 }}
                 >
                   <Product product={product} />
