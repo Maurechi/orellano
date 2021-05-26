@@ -12,14 +12,21 @@ import ProductCarousel from '../components/ProductCarousel';
 import { listProducts } from '../actions/productActions';
 import { AnimatePresence, motion } from 'framer-motion';
 import CustomHits from '../components/Hit';
+import CustomRefinementList from '../components/CustomRefinementList';
+import CustomPagination from '../components/CustomPagination';
 import {
   // connectHits,
-  InstantSearch,
-  SearchBox,
+  // InstantSearch,
+  // SearchBox,
   // Hits,
+  Pagination,
+  RefinementList,
 } from 'react-instantsearch-dom';
 import algoliasearch from 'algoliasearch/lite';
-import { SEARCHING_RESET } from '../constants/searchConstants';
+import {
+  SEARCHING_ACTIVE,
+  SEARCHING_RESET,
+} from '../constants/searchConstants';
 
 const HomeScreen = ({ match }) => {
   const keyword = match.params.keyword;
@@ -60,6 +67,7 @@ const HomeScreen = ({ match }) => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5 }}
+            className="inline"
           >
             <Link
               to="/"
@@ -68,6 +76,7 @@ const HomeScreen = ({ match }) => {
             >
               Back to Home
             </Link>
+            <CustomRefinementList attribute="category" />
           </motion.div>
         )}
         {!searching && (
@@ -79,7 +88,12 @@ const HomeScreen = ({ match }) => {
             exit={{ y: -30, opacity: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <h1 className="text-center white mt-auto">Latest Collection</h1>
+            <h1
+              className="text-center white mt-auto scale pointer"
+              onClick={() => dispatch({ type: SEARCHING_ACTIVE })}
+            >
+              Latest Collection
+            </h1>
           </motion.div>
         )}
       </AnimatePresence>
@@ -118,6 +132,7 @@ const HomeScreen = ({ match }) => {
                 </Col>
               ))} */}
             <CustomHits />
+            <CustomPagination />
             {/* </InstantSearch> */}
           </Row>
           {/* <Paginate

@@ -52,17 +52,42 @@ a {
   object-fit: cover;
 }
 
+.inline {
+  display: inline-flex;
+}
+
+.btn {
+  user-select: none;
+}
+
 .grow {
-  transition: all 0.1s ease-in-out;
+  transition: all 0.01s ease-in-out;
 }
 .grow:hover {
   transform: translate(0px, -3px) !important;
   box-shadow: 0px 4px 2px -3px rgb(170, 167, 167);
+  cursor: pointer;
+  user-select: none;
+}
+
+.no-deco {
+  list-style-type: none;
+}
+.scale {
+  transition: all 0.05s ease-in-out;
+}
+.scale:hover {
+  transform: scale(1.01);
+}
+
+.pointer {
+  cursor: pointer;
+  user-select: none;
 }
 
 .carousel-img {
   height: 227px !important;
-  /* width: 227px; */
+  width: 227px !important;
   object-fit: cover;
 }
 

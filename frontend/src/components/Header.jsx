@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { Navbar, Nav, Container, NavDropdown } from 'react-bootstrap';
+import { Navbar, Nav, Container, NavDropdown, Button } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 // import SearchBox from './SearchBox';
 // Algolia
@@ -24,6 +24,8 @@ const Header = () => {
     dispatch(logout());
   };
 
+  const searching = useSelector((state) => state.searching);
+
   return (
     <header>
       <Navbar
@@ -43,6 +45,14 @@ const Header = () => {
           <Navbar.Collapse id="basic-navbar-nav">
             {/* <SearchBox onChange={(e) => searchHandler(e.target.value)} /> */}
             <CustomSearchBox />
+            <LinkContainer
+              to=""
+              onClick={() => dispatch({ type: SEARCHING_ACTIVE })}
+            >
+              <Nav.Link className="black scale ml-auto">
+                <strong>Browse the Collection</strong>
+              </Nav.Link>
+            </LinkContainer>
             <Nav className="ml-auto">
               <LinkContainer to="/cart">
                 <Nav.Link className="black grow">
