@@ -62,7 +62,7 @@ a {
 
 .carousel-img {
   height: 227px !important;
-  width: 227px;
+  /* width: 227px; */
   object-fit: cover;
 }
 

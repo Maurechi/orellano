@@ -1,8 +1,18 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { Navbar, Nav, Container, NavDropdown } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
-import SearchBox from './SearchBox';
+// import SearchBox from './SearchBox';
+// Algolia
+// import { SearchBox } from 'react-instantsearch-dom';
+import CustomSearchBox from '../components/CustomSearchBox';
+import algoliasearch from 'algoliasearch/lite';
+
+//
 import { logout } from '../actions/userActions';
+import {
+  SEARCHING_ACTIVE,
+  SEARCHING_RESET,
+} from '../constants/searchConstants';
 
 const Header = () => {
   const userLogin = useSelector((state) => state.userLogin);
@@ -28,7 +38,8 @@ const Header = () => {
           </LinkContainer>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
-            <SearchBox />
+            {/* <SearchBox onChange={(e) => searchHandler(e.target.value)} /> */}
+            <CustomSearchBox />
             <Nav className="ml-auto">
               <LinkContainer to="/cart">
                 <Nav.Link className="black grow">
