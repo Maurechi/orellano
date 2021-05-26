@@ -33,7 +33,10 @@ const Header = () => {
         collapseOnSelect
       >
         <Container>
-          <LinkContainer to="/">
+          <LinkContainer
+            to="/"
+            onClick={() => dispatch({ type: SEARCHING_RESET })}
+          >
             <Navbar.Brand className="black">Macellaio</Navbar.Brand>
           </LinkContainer>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
